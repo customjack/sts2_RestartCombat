@@ -1,0 +1,11 @@
+{
+  "id": "RestartCombat",
+  "name": "RestartCombat",
+  "author": "Jack Carlton",
+  "description": "Adds a Restart Combat button to the in-run pause/settings menu, including host-driven multiplayer restarts.",
+  "version": "1.1.0",
+  "has_pck": true,
+  "has_dll": true,
+  "dependencies": [],
+  "affects_gameplay": true
+}
