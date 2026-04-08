@@ -160,7 +160,18 @@ internal static class RestartCombatSettingsButtonFeature
                 return;
             }
 
-            var readRunSaveResult = SaveManager.Instance.LoadRunSave();
+            ReadSaveResult<SerializableRun> readRunSaveResult;
+            if (IsHostMultiplayerRun())
+            {
+                var localPlayerId = RunManager.Instance.NetService.NetId;
+                Log.Info($"[RestartCombat] Loading multiplayer run save for localPlayerId={localPlayerId}");
+                readRunSaveResult = SaveManager.Instance.LoadAndCanonicalizeMultiplayerRunSave(localPlayerId);
+            }
+            else
+            {
+                readRunSaveResult = SaveManager.Instance.LoadRunSave();
+            }
+
             if (!readRunSaveResult.Success || readRunSaveResult.SaveData == null)
             {
                 Log.Warn("[RestartCombat] Could not load run save for restart.");
